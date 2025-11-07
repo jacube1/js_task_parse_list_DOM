@@ -12,7 +12,8 @@ function getSalaryValue(element) {
 function sortList(list) {
   const listItems = Array.from(list.children);
 
-  const itemsToSort = listItems.slice(0, 10);
+  // USUŃ: const itemsToSort = listItems.slice(0, 10);
+  const itemsToSort = listItems; // użyj całej listy
 
   itemsToSort.sort((a, b) => {
     const salaryA = getSalaryValue(a);
@@ -28,20 +29,18 @@ function sortList(list) {
 }
 
 function getEmployees(list) {
-  return Array.from(list.children)
-    .slice(0, 10) // TYLKO 10 pierwszych elementów
-    .map((item) => {
-      return {
-        imię: item.textContent.trim(),
-        stanowisko: item.dataset.position,
-        wynagrodzenie: getSalaryValue(item),
-        wiek: Number(item.dataset.age),
-      };
-    });
+  return Array.from(list.children).map((item) => {
+    return {
+      name: item.textContent.trim(),
+      position: item.dataset.position,
+      salary: getSalaryValue(item),
+      age: Number(item.dataset.age),
+    };
+  });
 }
 
 // Posortuj listę
 sortList(employeeList);
 
-// Pobierz tablicę pracowników - DODAJ TE LINIĘ
+// Pobierz tablicę pracowników
 getEmployees(employeeList);
